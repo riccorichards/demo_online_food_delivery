@@ -8,7 +8,6 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 const Container = styled.div`
   height: 90vh;
-  border: 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;

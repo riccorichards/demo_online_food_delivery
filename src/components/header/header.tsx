@@ -6,7 +6,6 @@ import Search from "./headComp/Search";
 
 const HeaderStyle = styled.div`
   padding: 5px 10px;
-  background-color: #ffffff;
   height: 7vh;
   display: flex;
   align-items: center;

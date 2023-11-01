@@ -7,26 +7,29 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 15%;
-  border: 1px solid;
   padding: 0 5px;
   border-radius: 15px;
   height: 4vh;
+  box-shadow: 0 0 20.5px rgba(0, 0, 0, 0.45);
 `;
 
 const SearchStyle = styled.input`
   width: 50px;
   flex: 5;
   border: none;
+  background-color: transparent;
   outline: none;
+  font-family: "Roboto Condensed", sans-serif;
+
   &::placeholder {
     font-family: "Roboto Condensed", sans-serif;
     letter-spacing: 0.5px;
   }
 `;
 
-const SeparateLine = styled.div`
-  width: 1px;
-  height: 100%;
+export const SeparateLine = styled.div`
+  width: 2px;
+  height: 70%;
   background-color: #032f05;
 `;
 

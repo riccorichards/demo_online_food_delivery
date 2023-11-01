@@ -6,7 +6,6 @@ import Food from "./Food";
 import Price from "./Price";
 
 const Container = styled.div`
-  margin-top: 35px;
   border-radius: 15px;
   background-color: #fff;
 `;

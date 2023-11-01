@@ -48,7 +48,7 @@ const LoginStyle = styled.div`
 const Search: FC = () => {
   const navigate = useNavigate();
   const goToLogin = () => {
-    navigate("/login");
+    navigate("/auth");
   };
   return (
     <Container>

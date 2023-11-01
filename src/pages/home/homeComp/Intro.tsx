@@ -68,7 +68,7 @@ const Intro = () => {
   const navigate = useNavigate();
 
   const goToLogin = () => {
-    navigate("/login");
+    navigate("/auth");
   };
 
   return (

@@ -18,6 +18,7 @@ const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: "Playpen Sans", "cursive";
 `;
 
 const OnlineStyle = styled.span`
@@ -49,7 +50,7 @@ const Button = styled.button`
   width: fit-content;
   background-color: #032f05;
   border: none;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
   padding: 15px 24px;
   border-radius: 15px;
   font-size: 18px;

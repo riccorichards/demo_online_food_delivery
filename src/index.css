@@ -6,7 +6,7 @@
 
 body {
   /*font-family: "Roboto Condensed", sans-serif;*/
-  font-family: "Playpen Sans", cursive;
+  font-family: "Playpen Sans", "cursive";
   width: 80%;
   margin: 0 auto;
   background-color: rgb(220, 222, 224);

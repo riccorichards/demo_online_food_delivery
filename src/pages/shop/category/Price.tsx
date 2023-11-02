@@ -40,7 +40,7 @@ const FieldArea = styled.div`
 
 const FromInput = styled.input`
   width: 50px;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
 
   &:focus {
     outline: none;
@@ -58,7 +58,7 @@ const ToWrapper = styled.div`
 `;
 const ToInput = styled.input`
   width: 50px;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
 
   &:focus {
     outline: none;

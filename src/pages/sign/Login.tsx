@@ -15,7 +15,7 @@ const Input = styled.input`
   border: none;
   padding: 8px 12px;
   width: 80%;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
 
   &:focus {
     outline: none;
@@ -27,7 +27,8 @@ const Button = styled.button`
   padding: 8px 12px;
   border: none;
   letter-spacing: 1.5px;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
+
   cursor: pointer;
   background-color: #70e8e8;
   &:active {

@@ -19,10 +19,9 @@ const SearchStyle = styled.input`
   border: none;
   background-color: transparent;
   outline: none;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Playpen Sans", "cursive";
 
   &::placeholder {
-    font-family: "Roboto Condensed", sans-serif;
     letter-spacing: 0.5px;
   }
 `;

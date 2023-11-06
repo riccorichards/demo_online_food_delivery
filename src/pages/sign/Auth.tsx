@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import bg from "../../assets/auth_bg.jpg";
 import { GiCardExchange } from "react-icons/gi";
-import { GrPowerReset } from "react-icons/gr";
+import { GrUserAdmin, GrRestaurant, GrUserExpert } from "react-icons/gr";
 import { ImEnter } from "react-icons/im";
 import { useState } from "react";
 import SignUp from "./SignUp";
@@ -53,6 +53,20 @@ const IconWrapper = styled.div`
     transform: scale(0.9);
   }
 `;
+const SwitcherWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-evenly;
+`;
+const Switcher = styled.div`
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.9);
+  }
+`;
 const FormWrapper = styled.div`
   flex: 4;
   height: 100%;
@@ -79,6 +93,8 @@ const FormTitle = styled.h1`
 
 const Auth = () => {
   const [authSwitcher, setAuthSwitcher] = useState(false);
+  const [whoIs, setWhoIs] = useState("customer");
+
   return (
     <Container>
       <AuthWrapper>
@@ -96,15 +112,23 @@ const Auth = () => {
           </Controller>
           <SeparateLine />
           <Controller>
-            <IconWrapper>
-              <GrPowerReset />
-            </IconWrapper>
+            <SwitcherWrapper>
+              <Switcher>
+                <GrUserAdmin onClick={() => setWhoIs("admin")} />
+              </Switcher>
+              <Switcher>
+                <GrRestaurant onClick={() => setWhoIs("vendor")} />
+              </Switcher>
+              <Switcher>
+                <GrUserExpert onClick={() => setWhoIs("customer")} />
+              </Switcher>
+            </SwitcherWrapper>
           </Controller>
         </Controllers>
         <FormWrapper>
           <Image src={bg} />
           <FormTitle>{authSwitcher ? "Login" : "Sign Up"}</FormTitle>
-          {authSwitcher ? <Login /> : <SignUp />}
+          {authSwitcher ? <Login whoIs={whoIs} /> : <SignUp />}
         </FormWrapper>
       </AuthWrapper>
     </Container>

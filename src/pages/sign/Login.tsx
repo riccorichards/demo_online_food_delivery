@@ -1,5 +1,11 @@
 import styled from "styled-components";
-
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { fetchCustomerLogin, fetchVendorLogin } from "../../redux/ApiCall";
+import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Form = styled.form`
   width: 80%;
   height: 50%;
@@ -36,12 +42,59 @@ const Button = styled.button`
   }
 `;
 
-const Login = () => {
+export const ErrorHandler = styled.span`
+  color: red;
+  font-size: 12px;
+  text-align: center;
+`;
+type LoginInputType = {
+  email: string;
+  password: string;
+};
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
+const Login: FC<{ whoIs: string }> = ({ whoIs }) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<LoginInputType>({
+    resolver: zodResolver(loginSchema),
+  });
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { auth } = useAppSelector((state) => state.auth);
+
+  const onSubmit = (data: LoginInputType) => {
+    if (whoIs === "vendor") {
+      dispatch(fetchVendorLogin(data));
+    } else {
+      dispatch(fetchCustomerLogin(data));
+    }
+  };
+
+  useEffect(() => {
+    if (auth?.status === "Vendor") {
+      navigate("/vendor-dashboard");
+    } else if (auth?.status === "Admin") {
+      navigate("/admin-dashboard");
+    } else if (auth?.status === "Customer") {
+      navigate("/");
+    }
+  }, [auth]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <Form>
-      <Input type="email" placeholder="Email" />
-      <Input type="password" placeholder="Password" />
-      <Button>Login</Button>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Input type="email" placeholder="Email" {...register("email")} />
+      {errors?.email && <ErrorHandler>{errors.email.message}</ErrorHandler>}
+      <Input type="password" placeholder="Password" {...register("password")} />
+      {errors?.password && (
+        <ErrorHandler>{errors?.password.message}</ErrorHandler>
+      )}
+      <Button type="submit">Login</Button>
     </Form>
   );
 };

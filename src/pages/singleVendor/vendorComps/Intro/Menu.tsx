@@ -9,6 +9,7 @@ import {
 } from "react-icons/ai";
 import { CiTwitter } from "react-icons/ci";
 import { SlSocialVkontakte } from "react-icons/sl";
+import { useAppSelector } from "../../../../redux/hook";
 
 const Container = styled.div`
   position: absolute;
@@ -128,6 +129,7 @@ const IconWrapper = styled.div`
 
 const Menu = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const { vendorById } = useAppSelector((state) => state.vendor);
 
   return (
     <Container>
@@ -141,7 +143,7 @@ const Menu = () => {
       <ContactWrapper>
         <ToOurEmail>
           <span>To:</span>
-          <span>existing@gmail.com</span>
+          <span>{vendorById?.email}</span>
         </ToOurEmail>
         <OurEmail placeholder="example@gmail.com" />
         <Button>Send</Button>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { MdLogout } from "react-icons/md";
 import { IoStatsChart } from "react-icons/io5";
+import { BiRestaurant } from "react-icons/bi";
 import { useAppDispatch } from "../../../redux/hook";
 import { logOut } from "../../../redux/slice/AuthSlice";
 import { Link } from "react-router-dom";
@@ -70,6 +71,12 @@ const AdminPanel = () => {
         <Item>Dashboard:</Item>
         <LinkItem to="/admin-dashboard">
           <IoStatsChart />
+        </LinkItem>
+      </ItemsWrapper>
+      <ItemsWrapper>
+        <Item>Create vendor:</Item>
+        <LinkItem to="/create-vendor">
+          <BiRestaurant />
         </LinkItem>
       </ItemsWrapper>
       <ItemsWrapper>

@@ -1,14 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-
-interface FoodType {
-  id: number;
-  img: string;
-  title: string;
-  price: string;
-  desc: string;
-}
-
+import { GetFoodsType } from "../../../../redux/ApiCall";
 const Container = styled.div`
   width: 100%;
   height: 15vh;
@@ -22,6 +14,7 @@ const ImageWrapper = styled.div`
   height: 100px;
   border-radius: 50%;
   border: 3.5px solid orangered;
+  position: relative;
 `;
 const Image = styled.img`
   border-radius: 50%;
@@ -56,21 +49,22 @@ const Price = styled.span`
 `;
 
 const Desc = styled.p`
-  font-size: 18px;
+  font-size: 12px;
 `;
-const FoodTemplate: FC<{ food: FoodType }> = ({ food }) => {
+
+const FoodTemplate: FC<{ food: GetFoodsType }> = ({ food }) => {
   return (
     <Container>
       <ImageWrapper>
-        <Image src={food.img} />
+        <Image src={food.images} />
       </ImageWrapper>
       <Details>
         <TitlePlace>
-          <Title>{food.title}</Title>
+          <Title>{food.name}</Title>
           <Decor />
           <Price>{food.price}</Price>
         </TitlePlace>
-        <Desc>{food.desc}</Desc>
+        <Desc>{food.description}</Desc>
       </Details>
     </Container>
   );

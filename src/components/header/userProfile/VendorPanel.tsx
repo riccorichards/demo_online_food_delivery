@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MdLogout } from "react-icons/md";
-import { IoStatsChart } from "react-icons/io5";
+import { IoStatsChart, IoFastFoodSharp } from "react-icons/io5";
 import { useAppDispatch } from "../../../redux/hook";
 import { logOut } from "../../../redux/slice/AuthSlice";
 import { Link } from "react-router-dom";
@@ -70,6 +70,12 @@ const VendorPanel = () => {
         <Item>Dashboard:</Item>
         <LinkItem to="/vendor-dashboard">
           <IoStatsChart />
+        </LinkItem>
+      </ItemsWrapper>
+      <ItemsWrapper>
+        <Item>Add Food:</Item>
+        <LinkItem to="/create-food">
+          <IoFastFoodSharp />
         </LinkItem>
       </ItemsWrapper>
       <ItemsWrapper>

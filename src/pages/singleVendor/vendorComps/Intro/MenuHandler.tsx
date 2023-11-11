@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAppSelector } from "../../../../redux/hook";
 
 const Container = styled.div`
   position: absolute;
@@ -26,22 +27,24 @@ const Food = styled.span`
 `;
 
 const MenuHandler = () => {
+  const { vendorById } = useAppSelector((state) => state.vendor);
+
   return (
     <Container>
       <SessionsWrapper>
-        <FoodSession>Appetizers:</FoodSession>
+        <FoodSession>{vendorById?.foodType[0]}</FoodSession>
         <Food>Shrimp cocktail</Food>
         <Food>Calamari Fritti</Food>
         <Food>Crab cakes</Food>
       </SessionsWrapper>
       <SessionsWrapper>
-        <FoodSession>Appetizers:</FoodSession>
+        <FoodSession>{vendorById?.foodType[1]}</FoodSession>
         <Food>Shrimp cocktail</Food>
         <Food>Calamari Fritti</Food>
         <Food>Crab cakes</Food>
       </SessionsWrapper>
       <SessionsWrapper>
-        <FoodSession>Appetizers:</FoodSession>
+        <FoodSession>{vendorById?.foodType[2]}</FoodSession>
         <Food>Shrimp cocktail</Food>
         <Food>Calamari Fritti</Food>
         <Food>Crab cakes</Food>

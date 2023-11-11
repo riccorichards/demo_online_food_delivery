@@ -4,6 +4,7 @@ import styled from "styled-components";
 import mapboxgl from "mapbox-gl";
 import { AiOutlineZoomIn, AiOutlineZoomOut } from "react-icons/ai";
 import Contact from "./Contact";
+import { useAppSelector } from "../../../../redux/hook";
 
 const Container = styled.div`
   width: 100%;
@@ -50,24 +51,36 @@ const Location: FC = () => {
   const TOKEN = process.env["REACT_APP_MAPBOX_PUBLIC_KEY"];
   const mapContainer = useRef<HTMLDivElement | null>(null);
   let map = useRef<mapboxgl.Map | null>(null);
+  const { vendorById } = useAppSelector((state) => state.vendor);
+
+  const lng = vendorById && vendorById.lng;
+  const lat = vendorById && vendorById.lat;
 
   useEffect(() => {
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current!,
-      center: [44.8015, 41.6938],
-      style: "mapbox://styles/riccorichards/cloizlwqv005k01qmgy13e7p3",
-      accessToken: TOKEN,
-      zoom: 12,
-    });
-    new mapboxgl.Marker({
-      color: "orange",
-      rotation: 45,
-    })
-      .setLngLat([44.8015, 41.6968])
-      .addTo(map.current);
+    const container = mapContainer.current;
 
+    if (container) {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+    }
+    if (lng && lat) {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current!,
+        center: [parseFloat(lng), parseFloat(lat)],
+        style: "mapbox://styles/riccorichards/cloizlwqv005k01qmgy13e7p3",
+        accessToken: TOKEN,
+        zoom: 14,
+      });
+      new mapboxgl.Marker({
+        color: "orange",
+        rotation: 45,
+      })
+        .setLngLat([parseFloat(lng), parseFloat(lat)])
+        .addTo(map.current);
+    }
     return () => map.current?.remove();
-  }, [TOKEN]);
+  }, [TOKEN, lat, lng]);
 
   const handleZoomIn = () => {
     if (map.current) map.current.zoomIn();

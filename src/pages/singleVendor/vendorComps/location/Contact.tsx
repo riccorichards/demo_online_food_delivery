@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAppSelector } from "../../../../redux/hook";
 
 const Container = styled.div`
   width: 100%;
@@ -30,25 +31,26 @@ const Item = styled.span`
   border-bottom: 1px solid;
 `;
 const Contact = () => {
+  const { vendorById } = useAppSelector((state) => state.vendor);
   return (
     <Container>
       <ContactWrapper>
         <ContanctHeader>contact</ContanctHeader>
         <ItemWrapper>
           <Item>phone</Item>
-          <Item>(+995) 555-555</Item>
+          <Item>{vendorById?.phone}</Item>
         </ItemWrapper>
         <ItemWrapper>
           <Item>address</Item>
-          <Item>Georgia, Tbilisi</Item>
+          <Item>{vendorById?.address}</Item>
+        </ItemWrapper>
+        <ItemWrapper>
+          <Item>Email</Item>
+          <Item>{vendorById?.email}</Item>
         </ItemWrapper>
       </ContactWrapper>
       <ContactWrapper>
         <ContanctHeader>Openning hours</ContanctHeader>
-        <ItemWrapper>
-          <Item>address</Item>
-          <Item>Georgia, Tbilisi</Item>
-        </ItemWrapper>
         <ItemWrapper>
           <Item>monday-friday</Item>
           <Item>09:30 am - 23:30 pm</Item>

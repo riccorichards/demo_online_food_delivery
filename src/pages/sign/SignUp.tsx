@@ -46,7 +46,7 @@ const Button = styled.button`
   }
 `;
 
-const isValidPhoneNumber = (phoneNumber: string) => {
+export const isValidPhoneNumber = (phoneNumber: string): boolean => {
   const phonePattern = /^\d{9}$/;
   return phonePattern.test(phoneNumber);
 };

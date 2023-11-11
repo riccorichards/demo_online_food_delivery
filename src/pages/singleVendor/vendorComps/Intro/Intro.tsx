@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import restaurant_1 from "../../../../assets/restaurant/restaurant_1.jpeg";
 import Menu from "./Menu";
+import { useAppSelector } from "../../../../redux/hook";
 
 const Container = styled.div`
   width: 100%;
@@ -17,9 +18,14 @@ const Image = styled.img`
 `;
 
 const Intro = () => {
+  const { vendorById } = useAppSelector((state) => state.vendor);
+
   return (
     <Container>
-      <Image src={restaurant_1} alt="restaurant" />
+      <Image
+        src={vendorById?.coverImage ? vendorById?.coverImage : restaurant_1}
+        alt="restaurant"
+      />
       <Menu />
     </Container>
   );

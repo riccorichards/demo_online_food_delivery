@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Switch from "@mui/material/Switch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainCourses from "./MainCourses";
 import SideDishes from "./SideDishes";
 import MenuHeaderTemplate from "./MenuHeader";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hook";
+import { getAllfoods } from "../../../../redux/ApiCall";
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
 
@@ -33,6 +35,12 @@ const Switcher = styled.span`
 `;
 const Menu = () => {
   const [setMenu, setSetMenu] = useState(true);
+  const { auth } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const signature = auth?.signature;
+  useEffect(() => {
+    dispatch(getAllfoods(signature));
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Container>
       <MenuHeaderWrapper>

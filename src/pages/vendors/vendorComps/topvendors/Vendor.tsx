@@ -1,22 +1,23 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { TopVendorsType } from "../../../../redux/ApiCall";
 
-const Container = styled.div``;
-
-const Title = styled(Link)`
-  text-decoration: none;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-interface VendorType {
-  id: number;
-  name: string;
-  rating: number;
-}
-const Vendor: FC<{ vendor: VendorType }> = ({ vendor }) => {
+const Title = styled(Link)`
+  color: #032f05;
+`;
+const Rating = styled.span``;
+
+const Vendor: FC<{ vendor: TopVendorsType }> = ({ vendor }) => {
   return (
-    <Container key={vendor.id}>
-      <Title to="">{`${vendor.id}) Restaurant: ${vendor.name} Rating: ${vendor.rating}`}</Title>
+    <Container key={vendor._id}>
+      <Title to={`/vendor/${vendor._id}`}>Vendor: {vendor.name}</Title>
+      <Rating>Rating: {vendor.rating}</Rating>
     </Container>
   );
 };

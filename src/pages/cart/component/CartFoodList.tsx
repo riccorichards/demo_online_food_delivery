@@ -12,6 +12,7 @@ import {
   updateCart,
 } from "../../../redux/ApiCall";
 import { MdDeleteForever } from "react-icons/md";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -26,8 +27,10 @@ const FoodWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 20vh;
   position: relative;
+  ${mobileDevice({
+    flexDirection: "column",
+  })}
 `;
 
 const FoodDetails = styled.div`
@@ -36,6 +39,9 @@ const FoodDetails = styled.div`
   flex: 3;
   gap: 10px;
   height: 100%;
+  ${mobileDevice({
+    flexDirection: "column",
+  })}
 `;
 
 const Image = styled.img`

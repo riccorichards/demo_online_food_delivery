@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useAppSelector } from "../../../redux/hook";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +34,7 @@ const About = styled.p`
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 800;
   text-transform: uppercase;
+  ${mobileDevice({ fontSize: "18px" })}
 `;
 
 const AboutVendor = () => {

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { logOut } from "../../../redux/slice/AuthSlice";
 import { Link } from "react-router-dom";
 import { mobileDevice } from "../../../responsive";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   position: absolute;
@@ -17,7 +18,7 @@ const Container = styled.div`
   margin-top: 15px;
   padding: 15px;
   border-radius: 15px;
-  box-shadow: 0 0 10.5px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 5.5px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -64,12 +65,29 @@ const StyledBadge = styled(Badge)`
   }
 `;
 
+const NavPlace = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+`;
 const UserPanel = () => {
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector((state) => state.cart);
   const handleLogOut = () => {
     dispatch(logOut());
   };
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <Container>
@@ -95,6 +113,13 @@ const UserPanel = () => {
           <MdLogout onClick={() => handleLogOut()} />
         </LogOutStyle>
       </ItemsWrapper>
+      {screenSize <= 430 && (
+        <NavPlace>
+          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
+          <Link to="/vendor">Vendors</Link>
+        </NavPlace>
+      )}
     </Container>
   );
 };

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import { mobileDevice } from "../../../../responsive";
 
 const MenuHeaderWrapper = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const MenuHeader = styled.span`
   color: #fff;
   text-transform: uppercase;
   text-shadow: 0 0 1.5px black;
+  ${mobileDevice({ fontSize: "45px" })}
 `;
 
 const MenuHeaderTemplate: FC<{ title: string }> = ({ title }) => {

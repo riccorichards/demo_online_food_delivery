@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import Stories from "./vendorComps/stories/Stories";
 import TopVendors from "./vendorComps/topvendors/TopVendors";
 import ListOfVendors from "./vendorComps/listOfVendors/ListOfVendors";
+import { mobileDevice } from "../../responsive";
 
 const Container = styled.div`
   margin-top: 35px;
-  height: 2000px;
+  padding: 15px;
 `;
 const Content = styled.div`
   margin-top: 35px;
   display: flex;
   gap: 15px;
+  ${mobileDevice({ display: "flex", flexDirection: "column" })}
 `;
 
 const TopVendorsWrapper = styled.div`
@@ -22,7 +23,6 @@ const ListOfVendorsWrapper = styled.div`
 const Vendors = () => {
   return (
     <Container>
-      <Stories />
       <Content>
         <TopVendorsWrapper>
           <TopVendors />

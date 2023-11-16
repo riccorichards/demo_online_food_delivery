@@ -2,7 +2,11 @@ import styled from "styled-components";
 import NearFoodTemplate from "./NearFoodTemplate";
 import seaFood from "../../../../../assets/seafood.png";
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SeaFood = () => {
   const fakeConet = {

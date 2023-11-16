@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { GrHomeRounded, GrRestaurant, GrContactInfo } from "react-icons/gr";
+import { GrHomeRounded, GrRestaurant } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
 import { mobileDevice } from "../../../responsive";
 
@@ -11,7 +11,7 @@ const Container = styled.div`
   width: 400px;
   justify-content: space-between;
   gap: 5px;
-  ${mobileDevice({ flexDirection: "column" })}
+  ${mobileDevice({ display: "none" })}
 `;
 
 const NavContainer = styled.div`
@@ -43,10 +43,6 @@ const Navs: FC = () => {
       <NavContainer>
         <GrRestaurant />
         <NavStyle to="/vendor">Vendor</NavStyle>
-      </NavContainer>
-      <NavContainer>
-        <GrContactInfo />
-        <NavStyle to="/about-me">About me</NavStyle>
       </NavContainer>
     </Container>
   );

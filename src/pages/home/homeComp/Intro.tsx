@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Lottie from "lottie-react";
 import animatedData from "../../../assets/lottie.json";
 import { useNavigate } from "react-router-dom";
+import { laptopDevice, mobileDevice } from "../../../responsive";
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -12,6 +14,7 @@ const InformationalPart = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  ${mobileDevice({ marginBottom: "150px" })}
 `;
 
 const TitleContainer = styled.div`
@@ -26,6 +29,8 @@ const OnlineStyle = styled.span`
   font-weight: 900;
   color: orange;
   text-shadow: 0 0 1.5px red;
+  ${laptopDevice({ fontSize: "60px" })}
+  ${mobileDevice({})}
 `;
 
 const FoodDeveliry = styled.div`
@@ -39,11 +44,13 @@ const TitleItems = styled.span`
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 1.5px;
+  ${laptopDevice({ fontSize: "24px" })}
 `;
 
 const Desc = styled.p`
   color: #032f05;
   font-size: 18px;
+  ${laptopDevice({ fontSize: "14px" })}
 `;
 
 const Button = styled.button`
@@ -64,6 +71,7 @@ const Button = styled.button`
 `;
 const LottieContainer = styled.div`
   flex: 1;
+  ${mobileDevice({ display: "none" })}
 `;
 const Intro = () => {
   const navigate = useNavigate();

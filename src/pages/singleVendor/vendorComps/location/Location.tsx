@@ -10,6 +10,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import VendorInfoForMarker, { VendorInfo } from "./VendorInfoForMarker";
+import { mobileDevice } from "../../../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -18,6 +19,11 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   gap: 15px;
+  ${mobileDevice({
+    flexDirection: "column",
+    gap: "15px",
+    height: "100vh",
+  })}
 `;
 
 const ContactWrapper = styled.div`
@@ -28,6 +34,10 @@ const MapWrapper = styled.div`
   height: 100%;
   border-radius: 15px;
   box-shadow: 0 0 10.5px rgba(0, 0, 0, 0.35);
+  ${mobileDevice({
+    height: "100vh",
+    width: "100%",
+  })}
 `;
 
 const googleMapApiKey: string | undefined =

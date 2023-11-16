@@ -10,6 +10,7 @@ import {
 import { CiTwitter } from "react-icons/ci";
 import { SlSocialVkontakte } from "react-icons/sl";
 import { useAppSelector } from "../../../../redux/hook";
+import { mobileDevice } from "../../../../responsive";
 
 const Container = styled.div`
   position: absolute;
@@ -23,6 +24,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  ${mobileDevice({ width: "280px", right: "4.9%" })}
 `;
 
 const MenuWrapper = styled.div`

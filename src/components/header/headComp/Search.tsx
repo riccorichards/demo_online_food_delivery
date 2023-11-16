@@ -15,12 +15,14 @@ const Container = styled.div`
   border-radius: 15px;
   height: 4vh;
   box-shadow: 0 0 10.5px rgba(0, 0, 0, 0.25);
+  position: relative;
   ${laptopDevice({ width: "25%" })}
   ${mobileDevice({
     width: "5%",
     display: "flex",
     justifyContent: "center",
     alignItem: "center",
+    position: "static",
   })}
 `;
 

@@ -2,7 +2,11 @@ import styled from "styled-components";
 import NearFoodTemplate from "./NearFoodTemplate";
 import chicken from "../../../../../assets/chicken.png";
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Chicken = () => {
   const fakeConet = {

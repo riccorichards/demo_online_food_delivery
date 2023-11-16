@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CartHeader from "./component/CartHeader";
 import CartFoodList from "./component/CartFoodList";
 import Checkout from "./component/Checkout";
+import { mobileDevice } from "../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -14,6 +15,9 @@ const Container = styled.div`
   gap: 15px;
   padding: 15px;
   height: calc(85vh - 35px);
+  ${mobileDevice({
+    height: "100%",
+  })}
 `;
 
 const Cart = () => {

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getAllfoods, getFilteredfoods } from "../../../redux/ApiCall";
 import Food from "./Food";
 import CatContext from "../../../context";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -14,6 +15,10 @@ const DataWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
+  ${mobileDevice({
+    display: "grid",
+    gridTemplateColumns: "repeat(1, 1fr)",
+  })}
 `;
 
 const Foods = () => {

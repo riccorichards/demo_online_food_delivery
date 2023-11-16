@@ -5,14 +5,20 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { useAppSelector } from "../../../redux/hook";
 import { CartType } from "../../../redux/ApiCall";
 import ModalComponent from "./Modal";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
-  height: 25vh;
   border-radius: 15px;
   background-color: rgb(220, 222, 224);
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
+  ${mobileDevice({
+    flexDirection: "column",
+    gap: "25px",
+    alignItems: "center",
+    padding: "15px",
+  })}
 `;
 
 const PayModel = styled.div`
@@ -31,6 +37,9 @@ const CheckoutWrapper = styled.div`
   align-self: baseline;
   display: flex;
   flex-direction: column;
+  ${mobileDevice({
+    margin: "0 auto",
+  })}
 `;
 
 const CheckoutItem = styled.div`

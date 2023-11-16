@@ -7,10 +7,10 @@ import {
   DirectionsRenderer,
   Libraries,
 } from "@react-google-maps/api";
-//import { IoMdNavigate } from "react-icons/io";
 import React, { useRef, useState } from "react";
 import { useAppSelector } from "../../redux/hook";
 import { Divider } from "@mui/material";
+import { mobileDevice } from "../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -18,6 +18,13 @@ const Container = styled.div`
   display: flex;
   gap: 10px;
   position: relative;
+  ${mobileDevice({
+    position: "static",
+    display: "flex",
+    flexDirection: "column",
+    height: "155vh",
+    padding: "15px 0",
+  })}
 `;
 
 const NavBar = styled.div`
@@ -34,6 +41,10 @@ const NavBar = styled.div`
   padding: 15px;
   z-index: 999;
   box-shadow: 0 0 5.5px rgba(0, 0, 0, 0.35);
+  ${mobileDevice({
+    position: "static",
+    width: "calc(100% - 30px)",
+  })}
 `;
 
 const StyleNavButton = styled.div`
@@ -141,7 +152,6 @@ const center = { lng: 44.790996836, lat: 41.706163842 };
 
 const googleMapLibraries: Libraries = ["places"];
 const vendorDemoAddress = "გოცირიძე, Tbilisi, Georgia";
-
 
 const GoogleMapApi = () => {
   const { cart, orderInfo } = useAppSelector((state) => state.cart);

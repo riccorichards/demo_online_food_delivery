@@ -13,8 +13,8 @@ const Container = styled.div`
 const Home = () => {
   return (
     <Container>
-      {/*<Intro />*/}
-      {/*<Features />*/}
+      <Intro />
+      <Features />
       <MapClusters />
     </Container>
   );

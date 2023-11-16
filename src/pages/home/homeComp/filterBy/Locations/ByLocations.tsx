@@ -16,7 +16,8 @@ const Title = styled.span`
 `;
 const ListWrapper = styled.div`
   border: 1px solid;
-  width: 250px;
+  min-width: 250px;
+  padding: 5px;
   height: 5vh;
   border-radius: 15px;
   display: flex;

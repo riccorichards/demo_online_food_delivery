@@ -1,5 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import CatContext from "../../../context";
+import { FilterByType } from "../../../redux/ApiCall";
 
 const Container = styled.div`
   display: flex;
@@ -38,23 +40,58 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
-const Content = styled(NavLink)`
+const Content = styled.div`
   width: fit-content;
   color: orangered;
   text-decoration: none;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
 interface ContentType {
-  id: number;
-  catName: any;
-}
-const CategoryTemplate = ({
-  title,
-  content,
-}: {
+  content: string[] | undefined;
   title: string;
-  content: ContentType[];
-}) => {
+}
+
+const CategoryTemplate = ({ title, content }: ContentType) => {
+  const [clickedContent, setClicketContent] = useState("");
+  const getContext = useContext(CatContext);
+
+  if (getContext === null) return null;
+
+  const setFilterBy = getContext.setFilterBy;
+  const { reset } = getContext.filterBy;
+
+  const onClick = (name: string) => {
+    setClicketContent((prev) => (prev === name ? "" : name));
+
+    setFilterBy((prev: FilterByType) => {
+      if (title === "Vendors") {
+        return {
+          ...prev,
+          vendor: clickedContent === name ? "" : name,
+          reset: false,
+        };
+      } else if (title === "Duration") {
+        return {
+          ...prev,
+          duration: clickedContent === name ? "" : name,
+          reset: false,
+        };
+      } else if (title === "Cuisines") {
+        return {
+          ...prev,
+          cuisines: clickedContent === name ? "" : name,
+          reset: false,
+        };
+      }
+      return prev;
+    });
+  };
+
   return (
     <Container>
       <TitleWrapper>
@@ -62,9 +99,16 @@ const CategoryTemplate = ({
         <Title>{title}</Title>
       </TitleWrapper>
       <ContentWrapper>
-        {content.map((el) => (
-          <Content to={`shop/${el.id}`} key={el.id}>
-            {el.catName}
+        {content?.map((name) => (
+          <Content
+            key={name}
+            style={{
+              color:
+                clickedContent === name && !reset ? "#032f05" : "orangered",
+            }}
+            onClick={() => onClick(name)}
+          >
+            {name}
           </Content>
         ))}
       </ContentWrapper>

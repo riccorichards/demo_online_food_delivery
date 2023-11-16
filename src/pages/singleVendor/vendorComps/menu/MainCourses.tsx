@@ -6,16 +6,18 @@ const Container = styled.div`
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 35px;
 `;
 
 const MainCourses = () => {
-  const { foods } = useAppSelector((state) => state.food);
+  const { vendorById } = useAppSelector((state) => state.vendor);
 
   return (
     <Container>
-      {foods &&
-        foods.map((food) => <FoodTemplate key={food._id} food={food} />)}
+      {vendorById &&
+        vendorById?.foods.map((food) => (
+          <FoodTemplate key={food._id} food={food} />
+        ))}
     </Container>
   );
 };

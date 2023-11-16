@@ -3,12 +3,15 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { GrHomeRounded, GrRestaurant, GrContactInfo } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 400px;
   justify-content: space-between;
-  width: 33%;
+  gap: 5px;
+  ${mobileDevice({ flexDirection: "column" })}
 `;
 
 const NavContainer = styled.div`

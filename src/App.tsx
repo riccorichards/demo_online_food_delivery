@@ -10,11 +10,19 @@ import AdminDashboard from "./pages/admin/admin-dashboard/AdminDashboard";
 import CreateVendor from "./pages/admin/CreateVendor";
 import { useAppSelector } from "./redux/hook";
 import CreateFood from "./pages/singleVendor/vendorComps/CreateFood";
+import CurrentOrder from "./pages/CurrentOrder/CurrentOrder";
+import styled from "styled-components";
+import Cart from "./pages/cart/Cart";
+
+const Container = styled.div`
+  
+`;
 
 const App = () => {
   const { auth } = useAppSelector((state) => state.auth);
+
   return (
-    <div>
+    <Container>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -36,8 +44,10 @@ const App = () => {
         />
         <Route path="/create-vendor" element={<CreateVendor />} />
         <Route path="/create-food" element={<CreateFood />} />
+        <Route path="/current-order" element={<CurrentOrder />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
-    </div>
+    </Container>
   );
 };
 

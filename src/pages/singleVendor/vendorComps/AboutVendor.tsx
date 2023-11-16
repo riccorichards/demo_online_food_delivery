@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useAppSelector } from "../../../redux/hook";
-import { capitalize } from "@mui/material";
 
 const Container = styled.div`
   width: 100%;
@@ -41,7 +40,7 @@ const AboutVendor = () => {
   return (
     <Container>
       <AboutInfoWrapper>
-        <AboutHeader>{vendorById && capitalize(vendorById?.name)}</AboutHeader>
+        <AboutHeader>{vendorById && vendorById?.name}</AboutHeader>
         <About>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus in
           minima odit nulla dolorum illo dolore vero, voluptas rerum amet.

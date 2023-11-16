@@ -1,19 +1,20 @@
+import { useAppSelector } from "../../../redux/hook";
 import CategoryTemplate from "./CategoryTemplate";
 
 const Cuisines = () => {
-  const cuisines = {
-    title: "Cuisines",
-    id: 1,
-    content: [
-      { id: 1, catName: "cuisines 1" },
-      { id: 2, catName: "cuisines 2" },
-      { id: 3, catName: "cuisines 3" },
-      { id: 4, catName: "cuisines 4" },
-    ],
-  };
+  const { foods } = useAppSelector((state) => state.food);
+
+  let foodTypes: string[] = [];
+  if (foods !== null) {
+    let uniqueFoodTypes = new Set(
+      foods.flatMap(({ foodType }) => foodType.map((el) => el.toLowerCase()))
+    );
+    foodTypes = Array.from(uniqueFoodTypes);
+  }
+
   return (
     <>
-      <CategoryTemplate title={cuisines.title} content={cuisines.content} />
+      <CategoryTemplate title="Cuisines" content={foodTypes} />
     </>
   );
 };

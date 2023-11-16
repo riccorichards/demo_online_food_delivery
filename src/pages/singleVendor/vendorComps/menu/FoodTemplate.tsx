@@ -33,12 +33,13 @@ const TitlePlace = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
+  gap: 5px;
 `;
 
-const Title = styled.h3`
+const Title = styled.h4`
   margin: 0;
   color: orangered;
+  width: 250px;
 `;
 const Decor = styled.span`
   border: dashed 1px;
@@ -49,7 +50,7 @@ const Price = styled.span`
 `;
 
 const Desc = styled.p`
-  font-size: 12px;
+  font-size: 11px;
 `;
 
 const FoodTemplate: FC<{ food: GetFoodsType }> = ({ food }) => {

@@ -41,22 +41,22 @@ const Vendor: FC<{ vendor: ListOfVendorsType }> = ({ vendor }) => {
   return (
     <>
       <Container key={vendor._id}>
-        {vendor.coverImage ? vendor.coverImage : <FakeImage />}
+        {vendor.coverImage ? (
+          <img src={vendor.coverImage} alt="vendorPicture" />
+        ) : (
+          <FakeImage />
+        )}
         <Item>
           <span>Vendors:</span>
           <Title to={`/vendor/${vendor._id}`}>{vendor.name}</Title>
         </Item>
         <Item>
-          <span>Categories:</span>
-          {vendor.foodType}
+          <span>Cuisines:</span>
+          {vendor.foodType.join(", ")}
         </Item>
         <Item>
           <span>Address:</span>
           <Item>{vendor.address}</Item>
-        </Item>
-        <Item>
-          <span>Menu:</span>
-          {vendor.foods}
         </Item>
         <Item>
           <span>Email:</span>
@@ -67,7 +67,7 @@ const Vendor: FC<{ vendor: ListOfVendorsType }> = ({ vendor }) => {
           {vendor.phone}
         </Item>
         <Item>
-          <span>Open:</span>
+          <span>Open: 09:30 - 23:30</span>
           {vendor.serviceAvailable}
         </Item>
         <Item>

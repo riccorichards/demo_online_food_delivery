@@ -1,10 +1,15 @@
-import "mapbox-gl/dist/mapbox-gl.css";
-import { FC, useEffect, useRef } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
-import mapboxgl from "mapbox-gl";
-import { AiOutlineZoomIn, AiOutlineZoomOut } from "react-icons/ai";
 import Contact from "./Contact";
 import { useAppSelector } from "../../../../redux/hook";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Libraries,
+  InfoWindow,
+} from "@react-google-maps/api";
+import VendorInfoForMarker, { VendorInfo } from "./VendorInfoForMarker";
 
 const Container = styled.div`
   width: 100%;
@@ -25,85 +30,74 @@ const MapWrapper = styled.div`
   box-shadow: 0 0 10.5px rgba(0, 0, 0, 0.35);
 `;
 
-const ControllerWapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  gap: 5px;
-  z-index: 999;
-`;
-const Controller = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  font-size: 18px;
-  padding: 5px;
-  border: none;
-  background-color: #fff;
-  color: #032f05;
-  cursor: pointer;
-`;
+const googleMapApiKey: string | undefined =
+  process.env["REACT_APP_GOOGLE_CLOUD_KEY"];
+const googleMapLibraries: Libraries = ["places"];
 
 const Location: FC = () => {
-  const TOKEN = process.env["REACT_APP_MAPBOX_PUBLIC_KEY"];
-  const mapContainer = useRef<HTMLDivElement | null>(null);
-  let map = useRef<mapboxgl.Map | null>(null);
   const { vendorById } = useAppSelector((state) => state.vendor);
+  const [isIntoWindow, setIsIntoWindow] = useState(false);
+  if (!googleMapApiKey) {
+    throw new Error(
+      "Google Cloud API key is not defined in environment variables"
+    );
+  }
 
-  const lng = vendorById && vendorById.lng;
-  const lat = vendorById && vendorById.lat;
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: googleMapApiKey,
+    libraries: googleMapLibraries,
+  });
 
-  useEffect(() => {
-    const container = mapContainer.current;
+  const lng = vendorById ? parseFloat(vendorById.lng) : null;
+  const lat = vendorById ? parseFloat(vendorById.lat) : null;
 
-    if (container) {
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-    }
-    if (lng && lat) {
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current!,
-        center: [parseFloat(lng), parseFloat(lat)],
-        style: "mapbox://styles/riccorichards/cloizlwqv005k01qmgy13e7p3",
-        accessToken: TOKEN,
-        zoom: 14,
-      });
-      new mapboxgl.Marker({
-        color: "orange",
-        rotation: 45,
-      })
-        .setLngLat([parseFloat(lng), parseFloat(lat)])
-        .addTo(map.current);
-    }
-    return () => map.current?.remove();
-  }, [TOKEN, lat, lng]);
-
-  const handleZoomIn = () => {
-    if (map.current) map.current.zoomIn();
+  if (lng === null || lat === null) return null;
+  const center = {
+    lng,
+    lat,
   };
 
-  const handleZoomOut = () => {
-    if (map.current) map.current.zoomOut();
+  if (!isLoaded) {
+    return <>Loading...</>;
+  }
+
+  const toggleIntoWindow = () => {
+    setIsIntoWindow(!isIntoWindow);
   };
 
+  const vendorInfo: VendorInfo = {
+    coverImage: vendorById?.coverImage || null,
+    name: vendorById?.name || null,
+    email: vendorById?.email || null,
+    phone: vendorById?.phone || null,
+    rating: vendorById?.rating || null,
+  };
   return (
     <Container>
       <ContactWrapper>
         <Contact />
       </ContactWrapper>
-      <MapWrapper ref={mapContainer}>
-        <ControllerWapper>
-          <Controller onClick={handleZoomIn}>
-            <AiOutlineZoomIn />
-          </Controller>
-          <Controller onClick={handleZoomOut}>
-            <AiOutlineZoomOut />
-          </Controller>
-        </ControllerWapper>
+      <MapWrapper>
+        <GoogleMap
+          center={center}
+          zoom={15}
+          options={{
+            streetViewControl: false,
+          }}
+          mapContainerStyle={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "15px",
+          }}
+        >
+          <Marker position={center} onClick={toggleIntoWindow}>
+            {isIntoWindow && (
+              <InfoWindow onCloseClick={toggleIntoWindow}>
+                <VendorInfoForMarker vendor={vendorInfo} />
+              </InfoWindow>
+            )}
+          </Marker>
+        </GoogleMap>
       </MapWrapper>
     </Container>
   );

@@ -4,6 +4,7 @@ import { IoStatsChart, IoFastFoodSharp } from "react-icons/io5";
 import { useAppDispatch } from "../../../redux/hook";
 import { logOut } from "../../../redux/slice/AuthSlice";
 import { Link } from "react-router-dom";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   position: absolute;
@@ -19,6 +20,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  ${mobileDevice({
+    display: "flex",
+    width: "100%",
+    height: "40vh",
+  })}
 `;
 
 const ItemsWrapper = styled.div`

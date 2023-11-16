@@ -5,16 +5,23 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hook";
 import ProfileImage from "../userProfile/ProfileImage";
 import ProfilePanel from "../userProfile/ProfilePanel";
+import { laptopDevice, mobileDevice } from "./../../../responsive";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
-  width: 15%;
+  width: 200px;
   padding: 0 5px;
   border-radius: 15px;
   height: 4vh;
-  box-shadow: 0 0 20.5px rgba(0, 0, 0, 0.45);
-  position: relative;
+  box-shadow: 0 0 10.5px rgba(0, 0, 0, 0.25);
+  ${laptopDevice({ width: "25%" })}
+  ${mobileDevice({
+    width: "5%",
+    display: "flex",
+    justifyContent: "center",
+    alignItem: "center",
+  })}
 `;
 
 const SearchStyle = styled.input`
@@ -24,6 +31,7 @@ const SearchStyle = styled.input`
   background-color: transparent;
   outline: none;
   font-family: "Playpen Sans", "cursive";
+  ${mobileDevice({ display: "none" })}
 
   &::placeholder {
     letter-spacing: 0.5px;
@@ -34,6 +42,7 @@ export const SeparateLine = styled.div`
   width: 2px;
   height: 70%;
   background-color: #032f05;
+  ${mobileDevice({ display: "none" })}
 `;
 
 const LoginStyle = styled.div`

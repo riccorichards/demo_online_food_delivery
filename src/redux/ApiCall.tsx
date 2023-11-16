@@ -137,6 +137,18 @@ export const fetchOtp = createAsyncThunk<
 
 ////////////////////////////////////////////////vendor api
 
+export type GetFoodsType = {
+  _id: string;
+  price: string;
+  images: string;
+  name: string;
+  description: string;
+  foodType: string[];
+  rating: number;
+  readyTime: number;
+  vendorId: string;
+};
+
 export type Vendor = {
   name: string;
   ownerName: string;
@@ -149,7 +161,7 @@ export type Vendor = {
   coverImage: string;
   serviceAvailable: boolean;
   rating: string;
-  foods: [string];
+  foods: GetFoodsType[];
   lat: string;
   lng: string;
   _id: string;
@@ -164,6 +176,8 @@ export type ListOfVendorsType = {
   rating: string;
   foods: [string];
   coverImage: string;
+  lat: string;
+  lng: string;
   _id: string;
 };
 
@@ -275,14 +289,6 @@ export type CreateFoodInput = {
   token: string;
 };
 
-export type GetFoodsType = {
-  _id: string;
-  price: string;
-  images: string;
-  name: string;
-  description: string;
-};
-
 export const createFood = createAsyncThunk<
   FormData,
   CreateFoodInput,
@@ -310,18 +316,22 @@ export const createFood = createAsyncThunk<
   }
 );
 
+export type FilterByType = {
+  cuisines?: string;
+  vendor?: string;
+  reset?: boolean;
+  duration?: string;
+};
+
 export const getAllfoods = createAsyncThunk<
   GetFoodsType[],
-  IdType,
+  undefined,
   { rejectValue: string }
->("foods/getAllfoods", async (signature: IdType, { rejectWithValue }) => {
+>("foods/getAllfoods", async (_: undefined, { rejectWithValue }) => {
   try {
     const { data } = await axios({
       method: "get",
-      url: "http://localhost:8000/vendor/foods",
-      headers: {
-        Authorization: `Bearer ${signature}`,
-      },
+      url: `http://localhost:8000/available-foods`,
     });
     return data;
   } catch (error) {
@@ -331,3 +341,147 @@ export const getAllfoods = createAsyncThunk<
     return rejectWithValue("Error fetching top vendors");
   }
 });
+
+export const getFilteredfoods = createAsyncThunk<
+  GetFoodsType[],
+  FilterByType,
+  { rejectValue: string }
+>(
+  "foods/getFilteredfoods",
+  async (filterBy: FilterByType, { rejectWithValue }) => {
+    try {
+      const { data } = await axios({
+        method: "get",
+        url: `http://localhost:8000/filtered-foods?vendor=${filterBy.vendor}&cuisines=${filterBy.cuisines}&duration=${filterBy.duration}&reset=${filterBy.reset}`,
+      });
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue("Error fetching top vendors: " + error.message);
+      }
+      return rejectWithValue("Error fetching top vendors");
+    }
+  }
+);
+
+////////////////////////////////////// cart
+
+export type CartType = {
+  food: GetFoodsType;
+  unit: number;
+  _id: string;
+};
+
+export type AddFoodCartType = {
+  _id: string;
+  unit: number;
+};
+
+export type CartInput = {
+  data: AddFoodCartType;
+  signature: string;
+};
+
+export const AddFoodToCart = createAsyncThunk<
+  CartType[],
+  CartInput,
+  { rejectValue: string }
+>("cart/AddFoodToCart", async (cart: CartInput, { rejectWithValue }) => {
+  try {
+    const { data } = await axios({
+      method: "post",
+      url: "http://localhost:8000/customer/cart",
+      headers: {
+        Authorization: `Bearer ${cart.signature}`,
+      },
+      data: cart.data,
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue("Error fetching top vendors: " + error.message);
+    }
+    return rejectWithValue("Error fetching top vendors");
+  }
+});
+
+export const getCart = createAsyncThunk<
+  CartType[],
+  SignatureType,
+  { rejectValue: string }
+>("cart/getCart", async (signature: SignatureType, { rejectWithValue }) => {
+  try {
+    const { data } = await axios({
+      method: "get",
+      url: "http://localhost:8000/customer/cart",
+      headers: {
+        Authorization: `Bearer ${signature}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue("Error fetching cart: " + error.message);
+    }
+    return rejectWithValue("Error fetching cart");
+  }
+});
+
+export type UpdateCartType = {
+  food: string;
+  unit: number;
+  _id: string;
+};
+
+export const updateCart = createAsyncThunk<
+  UpdateCartType[],
+  CartInput,
+  { rejectValue: string }
+>("cart/updateCart", async (cart: CartInput, { rejectWithValue }) => {
+  try {
+    const { data } = await axios({
+      method: "post",
+      url: "http://localhost:8000/customer/cart",
+      headers: {
+        Authorization: `Bearer ${cart.signature}`,
+      },
+      data: cart.data,
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue("Error fetching top vendors: " + error.message);
+    }
+    return rejectWithValue("Error fetching top vendors");
+  }
+});
+
+export type deleteFoodType = {
+  signature: string;
+  _id: string;
+};
+
+export const deleteFoodFromCart = createAsyncThunk<
+  CartType[],
+  deleteFoodType,
+  { rejectValue: string }
+>(
+  "cart/deleteFoodFromCart",
+  async (deleteFood: deleteFoodType, { rejectWithValue }) => {
+    try {
+      const { data } = await axios({
+        method: "delete",
+        url: `http://localhost:8000/customer/cart/${deleteFood._id}`,
+        headers: {
+          Authorization: `Bearer ${deleteFood.signature}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue("Error fetching top vendors: " + error.message);
+      }
+      return rejectWithValue("Error fetching top vendors");
+    }
+  }
+);

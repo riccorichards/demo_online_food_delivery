@@ -6,6 +6,9 @@ import ByTimes from "./Times/ByTimes";
 const Container = styled.div`
   height: 100vh;
   color: #032f05;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
 `;
 
 const FilterItems = styled.div`
@@ -16,7 +19,8 @@ const FilterItems = styled.div`
 
 const Title = styled.h1`
   font-size: 45px;
-  font-weight: 700;
+  font-weight: 900;
+  text-align: center;
 `;
 const FilterBy = () => {
   return (

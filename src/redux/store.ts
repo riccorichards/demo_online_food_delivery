@@ -4,11 +4,12 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import VendorSlice from "./slice/VendorSlice";
 import FoodSlice from "./slice/FoodSlice";
+import CartSlice from "./slice/CartSlice";
 
 const persistConfig = {
   key: "demo_online",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "food"],
   blachlist: ["vendor"],
 };
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   auth: AuthSlice,
   vendor: VendorSlice,
   food: FoodSlice,
+  cart: CartSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -2,15 +2,17 @@ import { Badge, IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import styled from "styled-components";
 import { MdLogout } from "react-icons/md";
-import { useAppDispatch } from "../../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { logOut } from "../../../redux/slice/AuthSlice";
+import { Link } from "react-router-dom";
+import { mobileDevice } from "../../../responsive";
 
 const Container = styled.div`
   position: absolute;
   top: 100%;
   right: -2.5%;
   background-color: #fff;
-  width: calc(100% + (-15px + (-7.5px)));
+  width: calc(100% + (-15px + (-15px)));
   z-index: 999;
   margin-top: 15px;
   padding: 15px;
@@ -19,6 +21,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  ${mobileDevice({
+    display: "flex",
+    width: "100%",
+    height: "40vh",
+  })}
 `;
 
 const ItemsWrapper = styled.div`
@@ -45,6 +52,10 @@ const LogOutStyle = styled.div`
   }
 `;
 
+const LinkStype = styled(Link)`
+  color: inherit;
+`;
+
 const StyledBadge = styled(Badge)`
   & .MuiBadge-badge {
     right: -3px;
@@ -55,10 +66,11 @@ const StyledBadge = styled(Badge)`
 
 const UserPanel = () => {
   const dispatch = useAppDispatch();
-
+  const { cart } = useAppSelector((state) => state.cart);
   const handleLogOut = () => {
     dispatch(logOut());
   };
+
   return (
     <Container>
       <ItemsWrapper>
@@ -69,8 +81,10 @@ const UserPanel = () => {
         <Item>Cart:</Item>
         <Item>
           <IconButton aria-label="cart">
-            <StyledBadge badgeContent={4} color="warning">
-              <AddShoppingCartIcon />
+            <StyledBadge badgeContent={cart?.length} color="warning">
+              <LinkStype to="/cart">
+                <AddShoppingCartIcon />
+              </LinkStype>
             </StyledBadge>
           </IconButton>
         </Item>

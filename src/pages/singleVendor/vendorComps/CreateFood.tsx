@@ -17,6 +17,7 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 15px;
+  position: relative;
 `;
 
 const Header = styled.h3``;
@@ -53,6 +54,17 @@ const Button = styled.button`
   &:active {
     transform: scale(0.95);
   }
+`;
+
+const Image = styled.img`
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  width: 100px;
+  height: 150px;
+  border-radius: 5px;
+  box-shadow: 0 0 5.5px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
 `;
 
 type CreateFoodTypeInput = {
@@ -136,7 +148,7 @@ const CreateFood = () => {
         <Input placeholder="Desc" {...register("desc")} />
         {errors.desc && <ErrorHandler>{errors.desc.message}</ErrorHandler>}
         <Input
-          placeholder="Separate each food by ',' like => food,"
+          placeholder="Separate each type of food by ',' like => seafood, chicken"
           {...register("foodType")}
         />
         {errors.foodType && (
@@ -151,11 +163,7 @@ const CreateFood = () => {
         <Button type="submit">Add a new Food</Button>
       </Form>
       {file ? (
-        <img
-          src={URL.createObjectURL(file)}
-          alt="selected file"
-          width="370px"
-        />
+        <Image src={URL.createObjectURL(file)} alt="selected file" />
       ) : null}
     </Container>
   );

@@ -75,7 +75,7 @@ export const fetchCustomerLogin = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "online-food-delivery-practical.vercel.app/customer/login",
+      url: "https://online-food-delivery-practical.vercel.app/customer/login",
       data: user,
     });
     return data;

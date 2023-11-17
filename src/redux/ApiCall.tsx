@@ -35,7 +35,7 @@ export const fetchRegister = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/customer/signup",
+      url: "online-food-delivery-practical.vercel.app/customer/signup",
       data: user,
     });
     return data;
@@ -55,7 +55,7 @@ export const fetchVendorLogin = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/vendor/login",
+      url: "online-food-delivery-practical.vercel.app/vendor/login",
       data: user,
     });
     return data;
@@ -75,7 +75,7 @@ export const fetchCustomerLogin = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/customer/login",
+      url: "online-food-delivery-practical.vercel.app/customer/login",
       data: user,
     });
     return data;
@@ -95,7 +95,7 @@ export const fetchVerify = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "patch",
-      url: "http://localhost:8000/customer/verify",
+      url: "online-food-delivery-practical.vercel.app/customer/verify",
       data: { otp: verify.otpStr },
       headers: {
         Authorization: `Bearer ${verify.signature}`,
@@ -120,7 +120,7 @@ export const fetchOtp = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: "http://localhost:8000/customer/otp",
+      url: "online-food-delivery-practical.vercel.app/customer/otp",
       headers: {
         Authorization: `Bearer ${signature}`,
         "Content-Type": "application/json",
@@ -212,7 +212,7 @@ export const createVendor = createAsyncThunk<
     try {
       const { data } = await axios({
         method: "post",
-        url: "http://localhost:8000/admin/vendor",
+        url: "online-food-delivery-practical.vercel.app/admin/vendor",
         data: vendor,
       });
       return data;
@@ -233,7 +233,7 @@ export const getVendors = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: "http://localhost:8000/admin/vendors",
+      url: "online-food-delivery-practical.vercel.app/admin/vendors",
     });
     return data;
   } catch (error) {
@@ -252,7 +252,7 @@ export const getTopVendors = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: "http://localhost:8000/top-restaurant",
+      url: "online-food-delivery-practical.vercel.app/top-restaurant",
     });
     return data;
   } catch (error) {
@@ -271,7 +271,7 @@ export const getVendorById = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: `http://localhost:8000/restaurant/${id}`,
+      url: `online-food-delivery-practical.vercel.app/restaurant/${id}`,
     });
     return data;
   } catch (error) {
@@ -299,7 +299,7 @@ export const createFood = createAsyncThunk<
     try {
       const { data } = await axios({
         method: "post",
-        url: `http://localhost:8000/vendor/food`,
+        url: `online-food-delivery-practical.vercel.app/vendor/food`,
         headers: {
           Authorization: `Beader ${foodData.token}`,
           "Content-Type": "multipart/form-data",
@@ -331,7 +331,7 @@ export const getAllfoods = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: `http://localhost:8000/available-foods`,
+      url: `online-food-delivery-practical.vercel.app/available-foods`,
     });
     return data;
   } catch (error) {
@@ -352,7 +352,7 @@ export const getFilteredfoods = createAsyncThunk<
     try {
       const { data } = await axios({
         method: "get",
-        url: `http://localhost:8000/filtered-foods?vendor=${filterBy.vendor}&cuisines=${filterBy.cuisines}&duration=${filterBy.duration}&reset=${filterBy.reset}`,
+        url: `online-food-delivery-practical.vercel.app/filtered-foods?vendor=${filterBy.vendor}&cuisines=${filterBy.cuisines}&duration=${filterBy.duration}&reset=${filterBy.reset}`,
       });
       return data;
     } catch (error) {
@@ -390,7 +390,7 @@ export const AddFoodToCart = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/customer/cart",
+      url: "online-food-delivery-practical.vercel.app/customer/cart",
       headers: {
         Authorization: `Bearer ${cart.signature}`,
       },
@@ -413,7 +413,7 @@ export const getCart = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "get",
-      url: "http://localhost:8000/customer/cart",
+      url: "online-food-delivery-practical.vercel.app/customer/cart",
       headers: {
         Authorization: `Bearer ${signature}`,
       },
@@ -441,7 +441,7 @@ export const updateCart = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/customer/cart",
+      url: "online-food-delivery-practical.vercel.app/customer/cart",
       headers: {
         Authorization: `Bearer ${cart.signature}`,
       },
@@ -471,7 +471,7 @@ export const deleteFoodFromCart = createAsyncThunk<
     try {
       const { data } = await axios({
         method: "delete",
-        url: `http://localhost:8000/customer/cart/${deleteFood._id}`,
+        url: `online-food-delivery-practical.vercel.app/customer/cart/${deleteFood._id}`,
         headers: {
           Authorization: `Bearer ${deleteFood.signature}`,
         },
@@ -494,7 +494,7 @@ export const deleteCart = createAsyncThunk<
   try {
     const { data } = await axios({
       method: "delete",
-      url: `http://localhost:8000/customer/cart`,
+      url: `https/online-food-delivery-practical.vercel.app/customer/cart`,
       headers: {
         Authorization: `Bearer ${signature}`,
       },

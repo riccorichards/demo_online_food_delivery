@@ -45,9 +45,10 @@ const FoodDetails = styled.div`
 `;
 
 const Image = styled.img`
-  flex: 1;
-  border-radius: 15px;
-  height: 100%;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 10px;
 `;
 
 const FoodDesc = styled.div`

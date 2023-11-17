@@ -88,7 +88,13 @@ const Image = styled.img`
 
 const FormTitle = styled.h1`
   color: aliceblue;
+  text-align: center;
   text-shadow: 0 0 1.5px orangered;
+`;
+
+const Demo = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Auth = () => {
@@ -127,7 +133,16 @@ const Auth = () => {
         </Controllers>
         <FormWrapper>
           <Image src={bg} />
-          <FormTitle>{authSwitcher ? "Login" : "Sign Up"}</FormTitle>
+          <Demo>
+            <span>Email: smith@example.com</span>
+            <span>Password: 123456789</span>
+            <span></span>
+          </Demo>
+          <FormTitle>
+            {authSwitcher
+              ? `Login As ${whoIs === "admin" ? "an" : "a"} ${whoIs}`
+              : "Sign Up"}
+          </FormTitle>
           {authSwitcher ? <Login whoIs={whoIs} /> : <SignUp />}
         </FormWrapper>
       </AuthWrapper>

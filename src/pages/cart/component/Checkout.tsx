@@ -71,7 +71,6 @@ const Checkout = () => {
   const [checkedWithCash, setCheckedWithCash] = React.useState(true);
   const [checkedWithOnline, setCheckedWithOnline] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { cart } = useAppSelector((state) => state.cart);
   const totalPrice = cart
@@ -143,7 +142,7 @@ const Checkout = () => {
           </span>
         </CheckoutItem>
         <Divider />
-        <CheckoutBtn onClick={handleOpen}>
+        <CheckoutBtn onClick={() => setOpen(true)}>
           <span>Checkout</span>
           <span>
             {totalPrice && checkedWithCash

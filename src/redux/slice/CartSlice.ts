@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   AddFoodToCart,
   CartType,
+  deleteCart,
   deleteFoodFromCart,
   getCart,
   updateCart,
@@ -67,6 +68,13 @@ const CartSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteFoodFromCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.cart = action.payload;
+      })
+      .addCase(deleteCart.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteCart.fulfilled, (state, action) => {
         state.loading = false;
         state.cart = action.payload;
       });

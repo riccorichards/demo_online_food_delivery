@@ -9,7 +9,7 @@ import CartSlice from "./slice/CartSlice";
 const persistConfig = {
   key: "demo_online",
   storage,
-  whitelist: ["auth", "food"],
+  whitelist: ["auth", "cart"],
   blachlist: ["vendor"],
 };
 

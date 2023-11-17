@@ -8,9 +8,11 @@ import {
   Libraries,
 } from "@react-google-maps/api";
 import React, { useRef, useState } from "react";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { Divider } from "@mui/material";
 import { mobileDevice } from "../../responsive";
+import { deleteCart } from "../../redux/ApiCall";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -142,6 +144,21 @@ const DetailsWrapper = styled.div`
   font-size: 12px;
 `;
 
+const OrderButton = styled.button`
+  background-color: orangered;
+  padding: 5px;
+  color: #fff;
+  width: fit-content;
+  font-family: "Playpen Sans", "cursive";
+  box-shadow: 0 0 5.5px rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  border: none;
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
 const MapWrapper = styled.div`
   flex: 4;
   border-radius: 15px;
@@ -171,6 +188,9 @@ const GoogleMapApi = () => {
     useState<google.maps.DirectionsResult | null>(null);
   const [distance, setDistance] = useState<string | null>(null);
   const [duration, setDuration] = useState<string | null>(null);
+  const { auth } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const toRef = useRef<HTMLInputElement>(null);
   const fromRef = useRef<HTMLInputElement>(null);
@@ -221,6 +241,17 @@ const GoogleMapApi = () => {
       fromRef.current.value = "";
     }
   };
+
+  const createOrder = () => {
+    try {
+      if (auth?.signature) {
+        dispatch(deleteCart(auth?.signature));
+        navigate("/");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
   return (
     <Container>
       <NavBar>
@@ -229,7 +260,7 @@ const GoogleMapApi = () => {
             <Input
               placeholder="your address"
               type="text"
-              value={vendorDemoAddress}
+              defaultValue={vendorDemoAddress}
               ref={toRef}
             />
           </Autocomplete>
@@ -237,7 +268,7 @@ const GoogleMapApi = () => {
             <Input
               placeholder="your destination"
               type="text"
-              value={orderInfo?.address}
+              defaultValue={orderInfo?.address}
               ref={fromRef}
             />
           </Autocomplete>
@@ -245,6 +276,9 @@ const GoogleMapApi = () => {
         <ButtonsWrapper>
           <CalcButton onClick={CulculateRirection}>Culculate</CalcButton>
           <ResetButton onClick={reset}>Reset</ResetButton>
+          <StyleNavButton onClick={() => map?.panTo(center)}>
+            At Center
+          </StyleNavButton>
         </ButtonsWrapper>
         <DestInfo>
           <h4 style={{ margin: "0" }}>Distance: {distance}</h4>
@@ -266,9 +300,7 @@ const GoogleMapApi = () => {
               </React.Fragment>
             ))}
         </CartPlace>
-        <StyleNavButton onClick={() => map?.panTo(center)}>
-          Return Me At Center
-        </StyleNavButton>
+        <OrderButton onClick={createOrder}>Create Order</OrderButton>
       </NavBar>
       <MapWrapper>
         <GoogleMap

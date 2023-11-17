@@ -485,3 +485,25 @@ export const deleteFoodFromCart = createAsyncThunk<
     }
   }
 );
+
+export const deleteCart = createAsyncThunk<
+  [],
+  SignatureType,
+  { rejectValue: string }
+>("cart/deleteCart", async (signature: SignatureType, { rejectWithValue }) => {
+  try {
+    const { data } = await axios({
+      method: "delete",
+      url: `http://localhost:8000/customer/cart`,
+      headers: {
+        Authorization: `Bearer ${signature}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue("Error fetching top vendors: " + error.message);
+    }
+    return rejectWithValue("Error fetching top vendors");
+  }
+});

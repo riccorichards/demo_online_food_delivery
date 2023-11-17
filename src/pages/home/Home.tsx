@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Intro from "./homeComp/Intro";
 import Features from "./homeComp/features/Features";
-import MapClusters from "../../components/GoogleMapApi/MapClusters";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +14,6 @@ const Home = () => {
     <Container>
       <Intro />
       <Features />
-      <MapClusters />
     </Container>
   );
 };

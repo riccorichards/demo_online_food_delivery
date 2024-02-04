@@ -8,7 +8,7 @@
     "@googlemaps/markerclusterer": "^2.5.1",
     "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "^5.14.16",
-    "@mui/material": "^5.14.16",
+    "@mui/material": "^5.15.4",
     "@mui/x-data-grid": "^6.17.0",
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.7",
